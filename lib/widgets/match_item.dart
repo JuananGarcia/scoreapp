@@ -20,8 +20,8 @@ class MatchItem extends StatelessWidget {
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Lugar: ${match.fixture.venue}, ${match.fixture.city}'),
-            Text('Fecha: ${match.fixture.date}'),
+            Text('Lugar: ${match.fixture.venue}'),
+            Text('Fecha: ${match.fixture.date.toString().split(' ')[0]}'),
           ],
         ),
         trailing: Column(
