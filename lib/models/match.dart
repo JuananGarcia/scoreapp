@@ -1,4 +1,5 @@
-import 'package:scoreapp/models/Fixture.dart';
+
+import 'Fixture.dart';
 
 class Match {
   final Fixture fixture;
