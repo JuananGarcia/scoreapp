@@ -4,35 +4,30 @@ import '../models/match.dart';
 class MatchItem extends StatelessWidget {
   final Match match;
 
-  MatchItem(this.match);
+  MatchItem({required this.match});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Row(
+      child: ListTile(
+        leading: Column(
           children: [
-            Image.network(match.homeLogo, height: 40, width: 40),
-            SizedBox(width: 10),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(match.homeTeam),
-                  Text(match.awayTeam),
-                ],
-              ),
-            ),
-            Column(
-              children: [
-                Text(match.result, style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(match.status, style: TextStyle(color: Colors.grey)),
-              ],
-            ),
-            SizedBox(width: 10),
-            Image.network(match.awayLogo, height: 40, width: 40),
+            Image.network(match.homeLogo, width: 30, height: 30),
+            Text(match.homeTeam),
+          ],
+        ),
+        title: Text('${match.homeGoals} - ${match.awayGoals}'),
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Lugar: ${match.fixture.venue}, ${match.fixture.city}'),
+            Text('Fecha: ${match.fixture.date}'),
+          ],
+        ),
+        trailing: Column(
+          children: [
+            Image.network(match.awayLogo, width: 30, height: 30),
+            Text(match.awayTeam),
           ],
         ),
       ),

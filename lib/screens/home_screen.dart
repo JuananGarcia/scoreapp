@@ -6,33 +6,29 @@ import '../widgets/match_item.dart';
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final footballProvider = Provider.of<FootballProvider>(context);
-
     return Scaffold(
       appBar: AppBar(
         title: Text('Partidos de Hoy'),
       ),
-      body: footballProvider.loading
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: footballProvider.leagues.length,
-              itemBuilder: (ctx, i) {
-                final league = footballProvider.leagues[i];
-                return Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text(
-                        league.name,
-                        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-                      ),
-                    ),
-                    ...league.matches.map((match) => MatchItem(match)).toList(),
-                  ],
-                );
-              },
-            ),
+      body: Consumer<FootballProvider>(
+        builder: (context, footballProvider, child) {
+          if (footballProvider.loading) {
+            return Center(child: CircularProgressIndicator());
+          }
+
+          if (footballProvider.matches.isEmpty) {
+            return Center(child: Text('No se encontraron partidos'));
+          }
+
+          return ListView.builder(
+            itemCount: footballProvider.matches.length,
+            itemBuilder: (ctx, i) {
+              final match = footballProvider.matches[i];
+              return MatchItem(match: match);
+            },
+          );
+        },
+      ),
     );
   }
 }
