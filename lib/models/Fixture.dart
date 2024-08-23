@@ -19,13 +19,13 @@ class Fixture {
 
   factory Fixture.fromJson(Map<String, dynamic> json) {
     return Fixture(
-      id: json['id'] ?? 'nulo',
+      id: json['id'],
       referee: json['referee'] ?? 'Unknown Referee',
-      timezone: json['timezone'] ?? 'nulo',
+      timezone: json['timezone'],
       date: DateTime.parse(json['date']),
-      status: json['status']['long'] ?? 'nulo',
-      venue: json['venue']['name'] ?? 'nulo',
-      city: json['venue']['city'] ?? 'nulo',
+      status: json['status']['long'],
+      venue: json['venue']['name'],
+      city: json['venue']['city'],
     );
   }
 }
